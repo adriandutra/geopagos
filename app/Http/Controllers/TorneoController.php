@@ -13,6 +13,14 @@ use App\Domain\Entities\Torneo;
 use App\Domain\Entities\Jugador;
 use Carbon\Carbon;
 
+/**
+ * @OA\Info(
+ *      title="API de Torneos de Tenis",
+ *      version="1.0.0",
+ *      description="Documentación de la API para gestionar torneos de tenis"
+ * )
+ */
+
 class TorneoController extends Controller {
     private $torneoRepo;
     private $jugadorRepo;
@@ -24,6 +32,20 @@ class TorneoController extends Controller {
         $this->simulacionService = $simulacionService;
     }
 
+     /**
+     * @OA\Post(
+     *      path="/v1/torneo",
+     *      operationId="iniciarTorneo",
+     *      tags={"Torneo"},
+     *      summary="Simulación de torneo",
+     *      description="Devuelve el ganador del torneo",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Operación exitosa",
+     *          content={}
+     *      ),
+     * )
+     */
     public function iniciarTorneo(Request $request) {
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string',
@@ -70,6 +92,21 @@ class TorneoController extends Controller {
         return response()->json(['ganador' => $ganador->nombre]);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/v1/torneos",
+     *      operationId="consultarTorneos",
+     *      tags={"Torneo"},
+     *      summary="Consultar Torneo",
+     *      description="Devuelve los torneos con filtro",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Operación exitosa",    
+     *          content={}
+     *      ),
+     * )
+     */
+
     public function consultarTorneos(Request $request) {
         $torneos = $this->torneoRepo->findByCriteria(
             $request->query('fecha'), 
@@ -79,6 +116,20 @@ class TorneoController extends Controller {
         return response()->json($torneos);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/v1/jugador/nombre",
+     *      operationId="consultarJugador",
+     *      tags={"Torneo"},
+     *      summary="Consultar Jugador",
+     *      description="Devuelve un determinado jugador",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Operación exitosa",  
+     *          content={}
+     *      ),
+     * )
+     */
     public function consultarJugador($nombre) {
         $jugador = $this->jugadorRepo->findByName($nombre);
         if (!$jugador) {

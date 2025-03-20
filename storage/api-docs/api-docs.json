@@ -1,0 +1,64 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Torneos de Tenis",
+        "description": "Documentación de la API para gestionar torneos de tenis",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/v1/torneo": {
+            "post": {
+                "tags": [
+                    "Torneo"
+                ],
+                "summary": "Simulación de torneo",
+                "description": "Devuelve el ganador del torneo",
+                "operationId": "iniciarTorneo",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/v1/torneos": {
+            "get": {
+                "tags": [
+                    "Torneo"
+                ],
+                "summary": "Consultar Torneo",
+                "description": "Devuelve los torneos con filtro",
+                "operationId": "consultarTorneos",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/v1/jugador/nombre": {
+            "get": {
+                "tags": [
+                    "Torneo"
+                ],
+                "summary": "Consultar Jugador",
+                "description": "Devuelve un determinado jugador",
+                "operationId": "consultarJugador",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {}
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Torneo",
+            "description": "Torneo"
+        }
+    ]
+}
